@@ -20,12 +20,12 @@ Beispiel: &lt;domain.tld&gt; oder &lt;node.domain.tld&gt;
  * fill in the category (find more in the podbe api documentation)
 
 * create your personal admin login in the setup.php
- * you can login under: &lt;domain.tld&gt;/home/admin/login
+ * you can login under: <code>&lt;domain.tld&gt;/home/admin/login</code>
 
 ### rights on server:
 
-* create: /tmp (www-data: 777)
-* rights: /app/assets/db/ (www-data: 777)
+* create: <code>/tmp</code> (www-data: 777)
+* rights: <code>/app/assets/db/</code> (www-data: 777)
 
 // ----------------------------- change log -------------------------
 
