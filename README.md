@@ -4,9 +4,18 @@
 
 // --------------------------- rechte vergabe -----------------------
 
+### Setup:
+* go to /app/controller/setup.php
+ * edit username & password - this are the login data from podbe api call (not user data!)
+ * fill in the category (find more in the podbe api documentation)
+
+* create your personal admin login in the setup.php
+ * you can login under: <domain.tld>/home/admin/login
+
+### rights on server:
+
 * create: /tmp (www-data: 777)
 * rights: /app/assets/db/ (www-data: 777)
-
 
 // ----------------------------- change log -------------------------
 
