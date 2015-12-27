@@ -10,7 +10,7 @@
  * fill in the category (find more in the podbe api documentation)
 
 * create your personal admin login in the setup.php
- * you can login under: <domain.tld>/home/admin/login
+ * you can login under: $lt;domain.tld>/home/admin/login
 
 ### rights on server:
 
