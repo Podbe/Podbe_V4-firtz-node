@@ -10,7 +10,7 @@
 global $datum;
 
 //func. vars
-$serverPath = 'http://localhost/tests/server.php';
+$serverPath = 'http://localhost/test/server.php';
 $datum = date( "d.m.Y" );
 
 

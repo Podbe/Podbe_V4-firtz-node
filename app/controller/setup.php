@@ -1,8 +1,14 @@
 <?php
 //-------------------------------- PODBE DATEN -------------------------------
-
+/*
+ * podbe node login:
+ */
 $username = 'podunion';
 $password = '1234';
+
+/*
+ * podbe categorys:
+ */
 $category = 'wissenschaft';
 
 //-------------------------------- LOGIN DATEN -------------------------------

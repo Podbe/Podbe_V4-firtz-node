@@ -16,10 +16,10 @@ class controller {
 
     function settings( $f3 ) {
 
+        //global vars
         global $serverPath;
         global $datum;
         global $login;
-
 
         //--- Settings: Base
         require_once( 'settings/base.php' );
@@ -33,13 +33,13 @@ class controller {
         //--- Route: Website & Extension
         require_once( 'routing/routings.php' );
 
-        //---- Route: Cloning
+        //--- Route: Cloning
         require_once( 'routing/clone.php' );
 
-        //---- Adminpage: functions
+        //--- Adminpage: functions
         require_once( "modals/admin.php" );
 
-        //---- Login: Setup
+        //--- Node: Setup
         require_once( "setup.php" );
 
     }

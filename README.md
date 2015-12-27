@@ -2,6 +2,12 @@
 
 * in Arbeit!
 
+// --------------------------- rechte vergabe -----------------------
+
+* create: /tmp (www-data: 777)
+* rights: /app/assets/db/ (www-data: 777)
+
+
 // ----------------------------- change log -------------------------
 
 *v 0.0.1*
