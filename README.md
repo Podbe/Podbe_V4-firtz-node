@@ -54,6 +54,7 @@ Beispiel: &lt;domain.tld&gt; oder &lt;node.domain.tld&gt;
 The MIT License (MIT)
 
 Copyright (c) 2015-2016 Michael McCouman Jr. (Redesign to directory: firtz-node),
+
 Copyright (c) 2013-2015 Christian Bednarek ( firtz 2.0 )
 
 // ----------------------------- firtz 2015 -------------------------
@@ -61,6 +62,7 @@ Copyright (c) 2013-2015 Christian Bednarek ( firtz 2.0 )
 The MIT License (MIT)
 
 Copyright (c) 2013-2015 Christian Bednarek (firtz 2.0)
+
 Copyright (c) 2015 Michael McCouman Jr. ( quorx II design )
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
