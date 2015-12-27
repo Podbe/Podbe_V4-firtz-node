@@ -4,7 +4,17 @@
 
 // --------------------------- rechte vergabe -----------------------
 
-### Setup:
+## installation:
+
+Die installation ist einfach. Lade dir den Node herunter. Du benötigst eine Subdomain oder direkte Domain zum 
+Ausführen des Node.
+
+<code>
+Beispiel: &lt;domain.tld&gt; oder &lt;node.domain.tld&gt;
+</code>
+
+### setup:
+
 * go to /app/controller/setup.php
  * edit username & password - this are the login data from podbe api call (not user data!)
  * fill in the category (find more in the podbe api documentation)
