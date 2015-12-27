@@ -15,7 +15,7 @@ Beispiel: &lt;domain.tld&gt; oder &lt;node.domain.tld&gt;
 
 ### setup:
 
-* go to /app/controller/setup.php
+* go to <code>/app/controller/setup.php</code>
  * edit username & password - this are the login data from podbe api call (not user data!)
  * fill in the category (find more in the podbe api documentation)
 
