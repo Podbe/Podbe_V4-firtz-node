@@ -1,0 +1,54 @@
+<FilesMatch "\.cfg$">
+deny from all
+</FilesMatch>
+<FilesMatch "\.node$">
+deny from all
+</FilesMatch>
+<FilesMatch "\.db$">
+deny from all
+</FilesMatch>
+<FilesMatch "\.ini$">
+deny from all
+</FilesMatch>
+
+<filesMatch "\.php$">
+FileETag None
+<ifModule mod_headers.c>
+Header unset ETag
+Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+Header set Pragma "no-cache"
+Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+</ifModule>
+</filesMatch>
+
+
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule .* index.php [L,QSA]
+
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresDefault "access plus 7 days"
+  <FilesMatch "\.(css|jpg|jpeg|png|gif|js)$">
+  FileETag None
+  </FilesMatch>
+        Header append Vary User-Agent env=!dont-vary
+</IfModule>
+<IfModule mod_deflate.c>
+    <IfModule mod_headers.c>
+        Header append Vary User-Agent env=!dont-vary
+    </IfModule>
+        AddOutputFilterByType DEFLATE text/css text/x-component application/x-javascript application/javascript text/javascript text/x-js text/html text/richtext image/svg+xml te$
+    <IfModule mod_mime.c>
+        # DEFLATE by extension
+        AddOutputFilter DEFLATE js css htm html xml
+    </IfModule>
+</IfModule>
+
+
+# Text für individuelle Fehleranzeige
+ErrorDocument 404 "Ups. Was haben Sie denn da für Unsinn angestellt - die angeforderte Ressource gibts hier ja gar nicht ;-)"
+ErrorDocument 500 "Ups. Was haben Sie denn da für Unsinn angestellt - die angeforderte Ressource gibts hier ja gar nicht ;-)"

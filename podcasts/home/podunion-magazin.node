@@ -1,0 +1,35 @@
+title:
+Podunion Magazin 0
+
+date:
+2013-02-15 20:00:00
+
+description:
+Kurz und knackig
+
+article:
+Stell Dir vor, das hier ist ein CMS. Dann wäre das hier der Artikel zum Podcast.
+Ich glaube, die Begrenzung liegt seitens iTunes bei 40.000 Zeichen.
+Du kannst also gerne ausführlich werden. Geize nicht mit Informationen :)
+
+keywords:
+auch hier dann wieder, eine, kommagetrennte, vernünftige Stichwortliste. Sei auch hier nicht geizig, aber auch nicht zu unspezifisch!
+
+#: Die Dauer gibst Du bitte mit "HH:MM:SS" an. Danke!
+duration:
+01:23:45
+
+chapters:
+00:00:00 Intro <http://node.org/> </images/node.png>
+00:09:12 Ziemlich in der Mitte <http://hoersuppe.de/> <http://hoersuppe.de/wp-content/uploads/2012/06/basic_avatar_200_notp.png>
+00:18:00 Kurz vor Ende <http://podlove.org/> <https://raw.github.com/podlove/podlove-web-player/2.0.x/podlove-web-player/samples/coverimage.png>
+00:18:22 Ja, die Kapitel hier sind wirklich nur zu Demozwecken da... <http://shownot.es/> </images/node.png>
+
+mp3:
+http://podcast.hoersuppe.de/fz001.mp3
+
+image:
+http://localhost/app/assets/img/inc/firtz.png
+
+contributors:
+mccouman

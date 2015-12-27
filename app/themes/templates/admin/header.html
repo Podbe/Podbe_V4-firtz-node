@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr" class="firtz-notouch">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <meta http-equiv="pragma" content="no-cache">
+
+    <title>Adminpage</title>
+
+    <link rel="shortcut icon" href="{{@BASEURL}}favicon.ico">
+
+    <link href="{{@BASEURL}}app/themes/templates/admin/admin.css" rel="stylesheet" media="screen" type="text/css"/>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+
+    <script src="{{@BASEURL}}app/assets/js/jquery.js"></script>
+    <script src="{{@BASEURL}}app/themes/templates/admin/quorx.js"></script>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body class="firtz-sidebar-a-right firtz-sidebars-1 firtz-isblog firtz-article-panel firtz-sticky-navbar">
+
+<div class="firtz-block-top">
+    <div class="firtz-container firtz-container-center">
+
+        <a class="firtz-logo firtz-visible-large" href="{{@BASEURL}}">
+            <img class="firtz-podcast-logo" width="55" src="{{@BASEURL}}app/assets/img/cover/cover.png"
+                 alt="Wissenschafts Podcasts">
+        </a>
+
+
+        <nav class="firtz-navbar">
+            <ul class="firtz-navbar-nav firtz-hidden-small">
+                <li>
+                    <a href="{{ @BASEURL }}{{ @adminlink }}">Home</a>
+                </li>
+                <li>
+                    <a href="{{ @BASEURL }}{{ @adminlink }}?intern=settings">Einstellungen</a>
+                </li>
+                <li>
+                    <a href="{{ @BASEURL }}{{ @adminlink }}?intern=updatepage">Aktualisieren</a>
+                </li>
+            </ul>
+
+
+
+            <div class="firtz-navbar-flip">
+                <div class="firtz-navbar-content firtz-hidden-small">
+                    <i class="fa fa-user"></i> <b>{{ @sysop }}</b>
+                </div>
+            </div>
+
+            <div class="firtz-navbar-content firtz-navbar-center firtz-hidden-large">
+                <a class="firtz-logo-small" href="{{@BASEURL}}">
+                    <img src="{{@BASEURL}}app/assets/img/cover/cover.png" width="40">
+                </a>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+<div class="firtz-container firtz-container-center" id="firtz-handy-artikel">
+    <div class="firtz-grid" data-firtz-grid-match="" data-firtz-grid-margin="">
