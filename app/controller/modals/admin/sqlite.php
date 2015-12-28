@@ -6,9 +6,13 @@
  * @by   Michael McCouman Jr.
  */
 
-/*
-* Erstellen einer File-DB. / Löschen der File-DB.
-*/
+/**
+ * Erstellen einer File-DB. / Löschen der File-DB.
+ *
+ * @param $schalter
+ *
+ * @return bool|SQLite3|string
+ */
 function schalterDB( $schalter ) {
 
     //SQLite anlegen
@@ -30,8 +34,11 @@ function schalterDB( $schalter ) {
     return $db;
 }
 
-
-//prüfe db.datei vorhanden
+/**
+ * Prüfe new.db Datei ob vorhanden / erstellt
+ *
+ * @return bool
+ */
 function isDBExists() {
     $filename = 'app/assets/db/new.db';
 
@@ -47,30 +54,41 @@ function isDBExists() {
     return $filestatus;
 }
 
-
-/*
-* Erstelle neu DB
-*/
+/**
+ * Erstelle neue DB (new.db) mit Daten der neuen Podcasts
+ *
+ * @param $db
+ */
 function createDB( $db ) {
-
-    $db->exec( "CREATE TABLE IF NOT EXISTS new (
-     id INTEGER PRIMARY KEY AUTOINCREMENT,
-     podcast TEXT NOT NULL DEFAULT '0',
-     slug TEXT NOT NULL DEFAULT '0',
-     nodetime TEXT NOT NULL DEFAULT '0',
-     podbetime TEXT NOT NULL DEFAULT '0',
-     ok TEXT NOT NULL DEFAULT '0')"
+    $db->exec( "CREATE TABLE IF NOT EXISTS
+              new (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                podcast TEXT NOT NULL DEFAULT '0',
+                slug TEXT NOT NULL DEFAULT '0',
+                url TEXT NOT NULL DEFAULT '0',
+                nodetime TEXT NOT NULL DEFAULT '0',
+                podbetime TEXT NOT NULL DEFAULT '0',
+                ok TEXT NOT NULL DEFAULT '0'
+              )"
     );
 }
 
-/*
-* Schreibe neue DB-Einträge.
-*/
+/**
+ * Schreibe neue DB-Einträge.
+ *
+ * @param $jsonData
+ * @param $db
+ * @param $datum
+ *
+ * @return bool (true|false)
+ */
 function writeDB( $jsonData, $db, $datum ) {
 
-    $checkCount = count($jsonData[ "podcasts" ])-1;
+    $checkCount = count( $jsonData[ "podcasts" ] ) - 1;
 
-    #var_dump($checkCount);
+    #echo '<pre>';
+    #var_dump( $jsonData );
+    #echo '</pre>';
 
     //Prüfe ob DB vorhanden und einen Eintrag hat.
     $newEntrysInDB = testDB( $db, $checkCount );
@@ -83,12 +101,13 @@ function writeDB( $jsonData, $db, $datum ) {
         while ( $i <= count( $jsonData[ "podcasts" ] ) - 1 )
         {
             $db->exec( "INSERT INTO new
-                ('podcast','slug','nodetime', 'podbetime', 'ok')
+                ('podcast','slug','url','nodetime', 'podbetime', 'ok')
                 VALUES
                 ( '" . $jsonData[ "podcasts" ][ $i ][ "name" ] . "',
                   '" . $jsonData[ "podcasts" ][ $i ][ "slug" ] . "',
+                  '" . $jsonData[ "podcasts" ][ $i ][ "url" ] . "',
                   '" . $datum . "',
-                  '" . $jsonData[ "timestamp" ] . "',
+                  '" . $jsonData[ "podcasts" ][ $i ][ "time" ] . "',
                   'i.A.'
                 )"
             );
@@ -106,9 +125,11 @@ function writeDB( $jsonData, $db, $datum ) {
     return $out;
 }
 
-/*
-* Lese Daten aus.
-*/
+/**
+ * Lese new.db Daten aus (Template: right)
+ *
+ * @param $db
+ */
 function readDB( $db ) {
     #$results = $db->query("SELECT * FROM new WHERE id='1'");
     if ( $db != '' )
@@ -144,7 +165,7 @@ function readDB( $db ) {
 
                         <?php
                         $testb = false;
-                        if ($testb == true )
+                        if ( $testb == true )
                         {
                             ?>
                             <a href="#"
@@ -182,18 +203,27 @@ function readDB( $db ) {
     }
 }
 
-/*
-* Löche Daten aus Tabelle.
-*/
+/**
+ * Löche new.db Daten aus Tabelle über id
+ *
+ * @param $db
+ * @param $id
+ */
 function deleteDB( $db, $id ) {
     // Löscht einen Eintrag über die ID
-    $db->query( "DELETE FROM new WHERE id=" . $id . "" );
-
+    $db->query( "DELETE FROM new WHERE id='" . $id . "'" );
 }
 
-/*
-* Prüfe ob Eintrag vorhanden
-*/
+/**
+ * Prüfe ob Eintrag vorhanden
+ *
+ * @info count( $JsonData['podcast'] )
+ *
+ * @param $db
+ * @param $id
+ *
+ * @return bool
+ */
 function testDB( $db, $id ) {
     $results = $db->query( "SELECT COUNT(id) FROM new WHERE id='" . $id . "'" );
     if ( $results->fetchArray()[ 0 ] == 1 )
@@ -208,4 +238,107 @@ function testDB( $db, $id ) {
     return $out;
 }
 
+// ------------------------ node system ---------------------
+
+/**
+ * Lese & erstelle Datenbank: node.db
+ *
+ * @param $schalter
+ *
+ * @return bool|SQLite3|string
+ */
+function schalterNodeDB( $schalter ) {
+
+    //SQLite anlegen
+    if ( $schalter == true )
+    {
+        $db = new SQLite3( 'app/assets/db/node.db' );
+    }
+    // lösche Datenbank wieder
+    elseif ( $schalter == false )
+    {
+        unlink( 'app/assets/db/node.db' );
+        $db = false;
+    }
+    else
+    {
+        $db = '';
+    }
+
+    return $db;
+}
+
+/**
+ * Erstelle neue DB (node.db) mit Daten des Node-System
+ *
+ * @param $db
+ */
+function createNodeDB( $db ) {
+    $db->exec( "CREATE TABLE IF NOT EXISTS
+              node (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                token TEXT NOT NULL DEFAULT '0',
+                lasttime TEXT NOT NULL DEFAULT '0'
+              )"
+    );
+}
+
+//prüfe node db
+function isNodeDBExists() {
+    $filename = 'app/assets/db/node.db';
+
+    if ( file_exists( $filename ) )
+    {
+        $filestatus = true;
+    }
+    else
+    {
+        $filestatus = false;
+    }
+
+    return $filestatus;
+}
+
+function writeNewNode( $db ) {
+    //schreibe datum in tabelle
+    $db->exec( "INSERT INTO system ( 'token', 'lasttime' )
+                VALUES
+                (
+                '1',
+                '12.12.2015'
+                )"
+    );
+}
+
+function writeLastDataInNodeDB( $db ) {
+    $db->exec( "UPDATE
+                node ('lasttime')
+                SET (id='1')
+                WHERE
+                lasttime='00.00.0000'"
+    );
+}
+
+function writeTokenInNodeDB( $db, $writeToken ) {
+    $db->exec( "UPDATE
+                node ('token')
+                SET (id='1')
+                WHERE lasttime=" . $writeToken . " "
+    );
+}
+
+
+function testNodeDB( $db, $id ) {
+    $results = $db->query( "SELECT COUNT(id) FROM node WHERE id='" . $id . "'" );
+    if ( $results->fetchArray()[ 0 ] == 1 )
+    {
+        $out = true;
+    }
+    else
+    {
+        $out = false;
+    }
+
+    return $out;
+}
 ?>

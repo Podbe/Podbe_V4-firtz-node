@@ -1,10 +1,11 @@
 ### Podbe Node (das firtz-knoten)
 
+* powered by firtz
 * in Arbeit!
 
 // --------------------------- rechte vergabe -----------------------
 
-## installation:
+#### installation:
 
 Die installation ist einfach. Lade dir den Node herunter. Du benötigst eine Subdomain oder direkte Domain zum 
 Ausführen des Node.
@@ -13,7 +14,7 @@ Ausführen des Node.
 Beispiel: &lt;domain.tld&gt; oder &lt;node.domain.tld&gt;
 </code>
 
-### setup:
+#### setup:
 
 * go to <code>/app/controller/setup.php</code>
  * edit username & password - this are the login data from podbe api call (not user data!)
@@ -22,14 +23,21 @@ Beispiel: &lt;domain.tld&gt; oder &lt;node.domain.tld&gt;
 * create your personal admin login in the setup.php
  * you can login under: <code>&lt;domain.tld&gt;/home/admin/login</code>
 
-### rights on server:
+#### rights on server:
 
 * create: <code>/tmp</code> (www-data: 777)
 * rights: <code>/app/assets/db/</code> (www-data: 777)
 
 // ----------------------------- change log -------------------------
 
-*v 0.0.1*
+*v 0.0.2* system daten speichern in der node.db
+
+- changes: speichern des tokens nach dem login in der node.db
+- changes: node.db speichert datum + token (datum wird später noch verwendung finden)
+- changes: routing.php, admin.php, sqlite.php, index.php
+ 
+
+*v 0.0.1* start firtz-knoten
 
 - changes: new file and folders for new data structure 
 - changes: introduction: app 
@@ -47,13 +55,13 @@ Beispiel: &lt;domain.tld&gt; oder &lt;node.domain.tld&gt;
 - new: admin db: sqlite db to create, read, delete all new podcast
 - new: node: new meta and data types in .htaccess 
 
-## license 
+### license 
 
 // ------------------------ firtz-node 2015/2016 ---------------------
 
 The MIT License (MIT)
 
-Copyright (c) 2015-2016 Michael McCouman Jr. (Redesign to directory: firtz-node),
+Copyright (c) 2015-2016 Michael McCouman Jr. ( Redesign to directory: firtz-node ),
 
 Copyright (c) 2013-2015 Christian Bednarek ( firtz 2.0 )
 
@@ -61,7 +69,7 @@ Copyright (c) 2013-2015 Christian Bednarek ( firtz 2.0 )
 
 The MIT License (MIT)
 
-Copyright (c) 2013-2015 Christian Bednarek (firtz 2.0)
+Copyright (c) 2013-2015 Christian Bednarek ( firtz 2.0 )
 
 Copyright (c) 2015 Michael McCouman Jr. ( quorx II design )
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * PODNODES DIRECTORY - ein firtz-knoten
+ * PODNODES DIRECTORY - firtz-knoten
  *
  * @info            PodNode ist ein auf firtz aufbauendes Podcastverzeichnis
  *                  Es wurde umgesetzt um als Knoten ...
@@ -21,6 +21,7 @@
 
 $f3 = require( 'app/assets/lib/base.php' );
 $f3 = Base::instance();
+
 $f3->config( 'app/config.ini' );
 
 $run = new controller();

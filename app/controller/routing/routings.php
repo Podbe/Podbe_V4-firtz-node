@@ -618,11 +618,9 @@ $f3->route( 'GET|HEAD /@podcast/admin/login', function ( $f3, $params )
     global $login;
 
     $userData = login( $login );
-
     $valid_users = array_keys( $userData );
     $user = @$_SERVER[ 'PHP_AUTH_USER' ];
     $pass = @$_SERVER[ 'PHP_AUTH_PW' ];
-
     $validated = ( in_array( $user, $valid_users ) ) && ( $pass == $login[ $user ] );
 
     if ( ! $validated )
@@ -638,42 +636,45 @@ $f3->route( 'GET|HEAD /@podcast/admin/login', function ( $f3, $params )
         $temp_path = $f3->get( "TEMPLATEPATH" ) . 'templates/admin';
         $admin_url = $f3->get( 'BASEURL' ) . $f3->get( 'adminlink' );
 
-        //------------------------------------ Adminpage: Home -----------------------------------
+        // ------------------------------------ Adminpage: Home -----------------------------------
         if ( @$_GET[ 'intern' ] == '' )
         {
             get_adminpageHome( $temp_path );
         }
 
-        //-------------------------------- Adminpage: Einstellungen -------------------------------
+        // -------------------------------- Adminpage: Einstellungen -------------------------------
         if ( @$_GET[ 'intern' ] == 'settings' )
         {
             get_adminpageSettings( $temp_path );
         }
 
-        //-------------------------------- Adminpage: Aktualisieren HOME---------------------------
+        // -------------------------------- Adminpage: Aktualisieren -------------------------------
         if ( @$_GET[ 'intern' ] == 'updatepage' )
         {
             $f3->clear('CACHE');
             get_adminpageUpdate( $temp_path );
         }
-        ###--- lade neue podcasts
+        ### --- lade neue podcasts ---
         elseif ( @$_GET[ 'intern' ] == 'update' && @$_GET[ 'up' ] == 'load-new-data' )
         {
             $f3->clear('CACHE');
             get_adminpageCheckNewPodcasts( $admin_url );
         }
-        ###--- löschen id
+        ### --- löschen id -----------
         elseif ( @$_GET[ 'intern' ] == 'update' && @$_GET[ 'delete' ] != '' )
         {
             $f3->clear('CACHE');
             $delete_id = @$_GET[ 'delete' ];
             get_adminpageDeletePodcast( $delete_id, $admin_url );
         }
-
-
+        ### --- create new nodes -----
+        elseif ( @$_GET[ 'intern' ] == 'update' && @$_GET[ 'up' ] == 'create-new-data' )
+        {
+            $f3->clear('CACHE');
+            get_adminpageCreatePodcast( $admin_url );
+        }
 
     }
-
 
 }, $f3->get( 'CDURATION' )
 );
@@ -793,100 +794,5 @@ foreach ( $firtz->extensions as $slug => $extension )
     );
 
 }
-
-//-------------------- #_old
-
-/*
-         * API ADN ROUTE: send a adn thread
-         *
-        $f3->route( 'GET /@podcast/adnthreadx/@postid', function ( $f3, $params )
-        {
-            $slug = $params[ 'podcast' ];
-
-            if ( ! in_array( $slug, $f3->get( 'podcasts' ) ) )
-            {
-                $f3->error( 404 );
-            }
-
-            $BASEPATH = $f3->get( 'PODCASTDIR' ) . '/' . $slug;
-            $podcastCONFIG = $BASEPATH . '/directory.cfg';
-            $podcast = new podcast( $f3, $slug, $podcastCONFIG );
-
-            if ( file_exists( $podcast->podcastDir . "/templates" ) )
-            {
-                $ui = $podcast->podcastDir . "/templates/ ; " . $f3->get( 'UI' );
-                $f3->set( 'UI', $ui );
-                $f3->set( 'templatepath', $podcast->podcastDir . "/templates" );
-            }
-
-            $f3->set( 'podcastattr', $podcast->attr );
-
-            $stream = "https://alpha-api.app.net/stream/0/posts/";
-
-            $curl = curl_init();
-
-            curl_setopt( $curl, CURLOPT_URL, $stream . $params[ 'postid' ] . '/replies'
-            );
-            curl_setopt( $curl, CURLOPT_TIMEOUT, 15 );
-            curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, true );
-            curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
-            curl_setopt( $curl, CURLOPT_HEADER, false );
-            curl_setopt( $curl, CURLOPT_HTTPHEADER, array( 'Authorization: Bearer ' . $podcast->attr[ 'adntoken' ] )
-            );
-            curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, false );
-
-            $return = curl_exec( $curl );
-
-            curl_close( $curl );
-            $x = json_decode( $return, true );
-
-            foreach ( $x[ 'data' ] as $key => $post )
-            {
-                $x[ 'data' ][ $key ][ 'html' ] =
-                    preg_replace( '/([^a-zA-Z0-9])\@([a-zA-Z0-9_]+)/',
-                        '\1<a href="http://alpha.app.net/\2" rel="nofollow" target="_blank" title="directory \2\'s ADN Profile">@\2</a>\3',
-                        $x[ 'data' ][ $key ][ 'html' ]
-                    );
-                $x[ 'data' ][ $key ][ 'html' ] =
-                    preg_replace( '/(^|\s)#(\w+)/',
-                        '\1#<a href="https://alpha.app.net/hashtags/\2" rel="nofollow" target="_blank" title="Posts tagged with \2">\2</a>',
-                        $x[ 'data' ][ $key ][ 'html' ]
-                    );
-
-            }
-
-            $f3->set( 'adnposts', array_reverse( $x[ 'data' ] ) );
-
-            echo Template::instance()->render( 'adnthread.html' );
-
-        }, $f3->get( 'CDURATION' )
-        );*/
-
-/*
- * API ROW ROUTE: get raws
- *
-$f3->route( 'GET|HEAD /@podcast/raw/@node', function ( $f3, $params )
-{
-    $slug = $params[ 'podcast' ];
-
-    if ( ! in_array( $slug, $f3->get( 'podcasts' ) ) )
-    {
-        $f3->error( 404 );
-    }
-
-    $BASEPATH = $f3->get( 'PODCASTDIR' ) . '/' . $slug;
-    $podcastCONFIG = $BASEPATH . '/directory.cfg';
-
-    $f3->set( 'node', $params[ 'node' ] );
-
-    $podcast = new podcast( $f3, $slug, $podcastCONFIG );
-    $podcast->findEpisodes();
-    $podcast->loadEpisodes( $params[ 'node' ] );
-
-    $podcast->renderRaw( $params[ 'node' ] );
-
-}, $f3->get( 'CDURATION' )
-);
-*/
 
 ?>
