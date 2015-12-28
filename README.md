@@ -3,6 +3,13 @@
 * powered by firtz
 * in Arbeit!
 
+
+
+##### Screenshot
+
+<img src="https://raw.githubusercontent.com/Podbe/Podbe_V4-firtz-node/master/screencapture-admin.png">
+
+
 // --------------------------- rechte vergabe -----------------------
 
 #### installation:
